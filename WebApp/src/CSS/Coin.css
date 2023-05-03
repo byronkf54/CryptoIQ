@@ -1,0 +1,103 @@
+table {
+  width: 80%;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+
+th {
+  text-align: left;
+  background-color: #f2f2f2;
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+}
+
+th:first-child,
+td:first-child {
+  padding-left: 20px;
+}
+
+th:last-child,
+td:last-child {
+  padding-right: 20px;
+}
+
+td {
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+}
+
+tr:hover {
+  background-color: #f5f5f5;
+}
+
+.coin-container .coin-row .coin img {
+  height: 30px !important; /* adjust the height as needed */
+  width: auto; /* preserve the aspect ratio of the image */
+  margin-right: 10px !important;
+}
+
+.coin .coin-details {
+  display: flex;
+  align-items: center;
+}
+
+.coin .coin-details img {
+  height: 30px;
+  margin-right: 10px;
+}
+
+.coin .coin-details h1 {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.coin .coin-details p {
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+.coin h1 {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.coin-symbol {
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+.coin-percent {
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+.red {
+  color: #f44336;
+}
+
+.green {
+  color: #4caf50;
+}
+
+/*  Tooltip Styling  */
+.tooltip {
+  position: relative;
+}
+
+.tooltip::after {
+  content: 'Tooltip Text';
+  position: absolute;
+  top: 50%;
+  right: calc(100% + 10px);
+  transform: translateY(-50%);
+  background-color: #000;
+  color: #fff;
+  padding: 5px;
+  border-radius: 3px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.tooltip:hover::after {
+  opacity: 1;
+}
