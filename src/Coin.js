@@ -53,7 +53,7 @@ const Coin = ({name, image, symbol, marketcap, volume, price, pricechange, ratin
                       </div>
                     )}
                   </>
-                ) : 'TBD'}
+                ) : <p style={{color: "red"}}>On it's way</p>}
 
             </td>
     </tr>
