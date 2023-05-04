@@ -16,8 +16,8 @@ from pathlib import Path
 data = pd.read_csv('./btc-usd-max.csv')
 # make folder for images
 # Path("/app/prediction_plots/Seq2Seq-tuning-plots").mkdir(parents=True, exist_ok=True)
-#print(data.iloc[2345])
-#print(data.tail())
+# print(data.iloc[2345])
+# print(data.tail())
 
 print(data.info())
 
@@ -37,7 +37,6 @@ plt.ylabel("Price (USD)", fontsize=18)
 plt.plot(X)
 plt.show()
 
-exit()
 x_train = X[:-540]
 y_test = X[-540:]
 
@@ -103,9 +102,6 @@ def create_model(input_seq_len, output_seq_len, layers, bidirectional=False):
         # Add a dense layer to reduce the size of the encoder hidden and cell states
         encoder_h = Dense(input_seq_len, activation='relu')(encoder_h)
         encoder_c = Dense(input_seq_len, activation='relu')(encoder_c)
-
-    # Define output sequence
-    decoder_inputs = Input(shape=(output_seq_len, 1))
 
     # Define decoder LSTM layer
     decoder_lstm = LSTM(input_seq_len, return_sequences=True, return_state=True)
@@ -176,7 +172,8 @@ def plot_loss(input_seq_len, train_loss, val_loss, bidi, layers, batch_size, nb_
     plt.ylabel('Mean Squared Error Loss')
     plt.title('Loss Over Time')
     plt.legend(['Train', 'Valid'])
-    plt.savefig(f'/app/prediction_plots/Seq2Seq-tuning-plots/ETH-loss-{nb_epochs}epochs-{input_seq_len}seq_len-{batch_size}batch_size-bidirectional{bidi}-{layers}layers.png')
+    plt.savefig(
+        f'/app/prediction_plots/Seq2Seq-tuning-plots/ETH-loss-{nb_epochs}epochs-{input_seq_len}seq_len-{batch_size}batch_size-bidirectional{bidi}-{layers}layers.png')
 
 
 def run_model(params):
@@ -195,7 +192,7 @@ def run_model(params):
     model.compile(Adam(), loss='mean_squared_error')
 
     total_loss, total_val_loss = train_model(model, epochs=nb_epochs, batch_size=batch_size, total_loss=total_loss,
-                                           total_val_loss=total_val_loss, input_seq_len=input_seq_len)
+                                             total_val_loss=total_val_loss, input_seq_len=input_seq_len)
 
     total_loss = [j for i in total_loss for j in i]
     total_val_loss = [j for i in total_val_loss for j in i]
@@ -217,16 +214,13 @@ def run_model(params):
     plt.ylabel("Price ($)", fontsize=12)
     plt.xlabel("future_days", fontsize=12)
     plt.legend()
-    plt.savefig(f'/app/prediction_plots/Seq2Seq-tuning-plots/ETH-prediction-{nb_epochs}epochs-{input_seq_len}seq_len-{batch_size}batch_size-bidirectional{bidi}-{layers}layers.png')
+    plt.savefig(
+        f'/app/prediction_plots/Seq2Seq-tuning-plots/ETH-prediction-{nb_epochs}epochs-{input_seq_len}seq_len-{batch_size}batch_size-bidirectional{bidi}-{layers}layers.png')
 
     return {"loss": total_loss[-1], "status": STATUS_OK}
 
 
 output_seq_len = 180
-
-# univariate
-n_in_features = 1
-n_out_features = 1
 
 # changing input_seq_len, layer_dimensions, number of layers, batch_size, bidirectionality
 space = {
